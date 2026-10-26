@@ -24,7 +24,8 @@ extracted from the radiology reports and refined with image models trained only 
 ```bash
 pip install -r requirements.txt
 export RSNA_KNEE_DATA=/path/to/data           # large files live here (default: ./data)
-# put the released model pack (Kaggle dataset, see below) in $RSNA_KNEE_DATA/models
+# the released model pack: Kaggle dataset centralyds/rsna-knee-6th-place-models (folder models/)
+kaggle datasets download centralyds/rsna-knee-6th-place-models -p $RSNA_KNEE_DATA --unzip   # -> $RSNA_KNEE_DATA/models
 python -m rsna_knee.predict --input /path/to/rsna-knee-abnormality-detection --split test --out predictions/
 python -m rsna_knee.predict --input /path/to/one_study_folder --out predictions/      # <study>/<series>/*.dcm
 ```
