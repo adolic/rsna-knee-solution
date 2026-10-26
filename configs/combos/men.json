@@ -1,0 +1,3 @@
+{"rows": [
+ {"target": "Medial Meniscus", "views": ["mm_ph", "mm_ah", "mm_body"], "cache": "crops-v7men", "train_cache": "oai-crops-v7men"},
+ {"target": "Lateral Meniscus", "views": ["lm_ph", "lm_ah", "lm_body"], "cache": "crops-v7men", "train_cache": "oai-crops-v7men"}]}

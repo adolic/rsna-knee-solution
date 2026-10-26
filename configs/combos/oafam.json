@@ -1,0 +1,4 @@
+{"rows": [
+ {"target": "Medial OA", "views": ["med_cor", "med_sag"], "cache": "crops-v6iso", "extra": [{"cache": "crops-v8zoom", "views": ["mtf_cor", "mtf_sag"]}], "head": "tf"},
+ {"target": "Lateral OA", "views": ["lat_cor", "lat_sag"], "cache": "crops-v6iso", "extra": [{"cache": "crops-v8zoom", "views": ["ltf_cor", "ltf_sag"]}], "head": "tf"},
+ {"target": "PF OA", "views": ["pf_ax", "pf_sag"], "cache": "crops-v6iso", "extra": [{"cache": "crops-v8zoom", "views": ["pfc_ax_med", "pfc_ax_lat", "pfc_sag"]}], "head": "pf"}]}

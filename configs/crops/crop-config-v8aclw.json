@@ -1,0 +1,68 @@
+{
+ "name": "crop-config-v8aclw",
+ "output_px": 224,
+ "rules": {
+  "output_px": 224,
+  "triplet_step_mm": 3.3,
+  "min_triplets": 4
+ },
+ "views": {
+  "aclw_sag": {
+   "plane": "Sagittal",
+   "anchor": "N",
+   "offset": [
+    -3,
+    -2,
+    -4
+   ],
+   "width_mm": 64,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -8,
+    8
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "aclw_cor": {
+   "plane": "Coronal",
+   "anchor": "N",
+   "offset": [
+    -3,
+    -2,
+    -4
+   ],
+   "width_mm": 60,
+   "scale_width": true,
+   "slab_axis": "a",
+   "slab_range": [
+    -16,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "aclw_ax": {
+   "plane": "Axial",
+   "anchor": "N",
+   "offset": [
+    -3,
+    -2,
+    -4
+   ],
+   "width_mm": 60,
+   "scale_width": true,
+   "slab_axis": "s",
+   "slab_range": [
+    -10,
+    12
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  }
+ }
+}

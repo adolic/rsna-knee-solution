@@ -1,0 +1,211 @@
+{
+ "name": "crop-config-v5",
+ "output_px": 224,
+ "rules": {
+  "output_px": 224,
+  "triplet_step_mm": 3.3,
+  "min_triplets": 4
+ },
+ "views": {
+  "base_sag": {
+   "plane": "Sagittal",
+   "anchor": "O",
+   "offset": [
+    0,
+    -4,
+    21
+   ],
+   "width_mm": 160,
+   "scale_width": false,
+   "slab_axis": "m",
+   "slab_range": [
+    -45,
+    45
+   ],
+   "sigma_mm": 30,
+   "train_budget": 8,
+   "infer_cap": 20
+  },
+  "base_cor": {
+   "plane": "Coronal",
+   "anchor": "O",
+   "offset": [
+    5,
+    0,
+    -2
+   ],
+   "width_mm": 130,
+   "scale_width": false,
+   "slab_axis": "a",
+   "slab_range": [
+    -45,
+    60
+   ],
+   "sigma_mm": 25,
+   "train_budget": 6,
+   "infer_cap": 16
+  },
+  "base_ax": {
+   "plane": "Axial",
+   "anchor": "O",
+   "offset": [
+    5,
+    -4,
+    0
+   ],
+   "width_mm": 140,
+   "scale_width": false,
+   "slab_axis": "s",
+   "slab_range": [
+    -45,
+    75
+   ],
+   "sigma_mm": 35,
+   "train_budget": 8,
+   "infer_cap": 20
+  },
+  "med_cor": {
+   "plane": "Coronal",
+   "anchor": "M",
+   "offset": [
+    5,
+    0,
+    5
+   ],
+   "width_mm": 80,
+   "scale_width": true,
+   "slab_mm": 25,
+   "sigma_mm": 12,
+   "train_budget": 4,
+   "infer_cap": 12
+  },
+  "med_sag": {
+   "plane": "Sagittal",
+   "anchor": "M",
+   "offset": [
+    0,
+    0,
+    2
+   ],
+   "width_mm": 64,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -15,
+    20
+   ],
+   "sigma_mm": 10,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "lat_cor": {
+   "plane": "Coronal",
+   "anchor": "L",
+   "offset": [
+    0,
+    0,
+    2
+   ],
+   "width_mm": 64,
+   "scale_width": true,
+   "slab_mm": 25,
+   "sigma_mm": 12,
+   "train_budget": 4,
+   "infer_cap": 12
+  },
+  "lat_sag": {
+   "plane": "Sagittal",
+   "anchor": "L",
+   "offset": [
+    0,
+    0,
+    2
+   ],
+   "width_mm": 64,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -20,
+    15
+   ],
+   "sigma_mm": 10,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "acl_sag": {
+   "plane": "Sagittal",
+   "anchor": "N",
+   "offset": [
+    0,
+    2.5,
+    -2.5
+   ],
+   "width_mm": 56,
+   "scale_width": true,
+   "slab_mm": 12,
+   "sigma_mm": 6,
+   "train_budget": 3,
+   "infer_cap": 7
+  },
+  "acl_cor": {
+   "plane": "Coronal",
+   "anchor": "N",
+   "offset": [
+    0,
+    0,
+    -2.5
+   ],
+   "width_mm": 56,
+   "scale_width": true,
+   "slab_mm": 22,
+   "sigma_mm": 10,
+   "train_budget": 3,
+   "infer_cap": 12
+  },
+  "pf_ax": {
+   "plane": "Axial",
+   "anchor": "PFmid",
+   "offset": [
+    0,
+    0,
+    0
+   ],
+   "width_mm": 72,
+   "scale_width": true,
+   "slab_mm": 25,
+   "sigma_mm": 12,
+   "train_budget": 4,
+   "infer_cap": 12
+  },
+  "pf_sag": {
+   "plane": "Sagittal",
+   "anchor": "PFmid",
+   "offset": [
+    0,
+    0,
+    0
+   ],
+   "width_mm": 72,
+   "scale_width": true,
+   "slab_mm": 25,
+   "sigma_mm": 12,
+   "train_budget": 4,
+   "infer_cap": 12
+  },
+  "bakers_ax": {
+   "plane": "Axial",
+   "anchor": "M",
+   "offset": [
+    7,
+    -45,
+    0
+   ],
+   "width_mm": 80,
+   "scale_width": true,
+   "slab_mm": 35,
+   "sigma_mm": 18,
+   "train_budget": 3,
+   "infer_cap": 10
+  }
+ }
+}

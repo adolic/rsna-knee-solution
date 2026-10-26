@@ -1,0 +1,25 @@
+{
+ "_doc": "Crop specialists blended into the tile ensemble per target (configs/submission_recipe.json: oa / spec weights). Caches are built by scripts/70_train_specialists.py --stage caches from the knee512 caches (DATA/cache/<source cache>); runs are rsna_knee.train_crops options. menpre runs once (fold 1 validation) on the OAI pseudo labels; its best.pt initialises the meniscus backbone of all five folds.",
+ "caches": {
+  "crops-v5-oa320":  {"config": "crop-config-v5", "size": 320, "source": "dicom", "from": "rsna",
+                      "views": ["med_cor", "med_sag", "lat_cor", "lat_sag", "pf_ax", "pf_sag"]},
+  "crops-v6iso":     {"config": "crop-config-v6iso", "size": 160, "source": "canvas", "from": "rsna"},
+  "crops-v7men":     {"config": "crop-config-v7men", "size": 160, "source": "canvas", "from": "rsna"},
+  "crops-v8aclw":    {"config": "crop-config-v8aclw", "size": 224, "source": "canvas", "from": "rsna"},
+  "crops-v8zoom":    {"config": "crop-config-v8zoom", "size": 160, "source": "canvas", "from": "rsna"},
+  "oai-crops-v7men": {"config": "crop-config-v7men", "size": 160, "source": "canvas", "from": "oai"}
+ },
+ "runs": {
+  "r50oa":  {"cache": "crops-v5-oa320", "views": ["med_cor", "med_sag", "lat_cor", "lat_sag", "pf_ax", "pf_sag"],
+             "targets": ["Medial OA", "Lateral OA", "PF OA"], "budget": 6, "backbone": "radimagenet-resnet50", "step": 0, "batch": 4,
+             "epochs": 25, "backbone_lr": 6e-05, "freeze_backbone_epochs": 3, "backbone_warmup_epochs": 2.0, "infer_all_slices": true},
+  "menpre": {"once": true, "combo": "combos/men.json", "train_labels": "pseudo-round1", "compartment_token": true, "budget": 2,
+             "batch": 12, "epochs": 8, "backbone_lr": 0.0001, "freeze_backbone_epochs": 3, "backbone_warmup_epochs": 2.0},
+  "men":    {"combo": "combos/men.json", "compartment_token": true, "budget": 2, "batch": 12, "epochs": 20, "backbone_lr": 6e-05,
+             "freeze_backbone_epochs": 3, "backbone_warmup_epochs": 2.0, "init_backbone": "menpre"},
+  "acl":    {"cache": "crops-v8aclw", "views": ["aclw_sag", "aclw_cor", "aclw_ax"], "targets": ["ACL"], "budget": 2, "batch": 12,
+             "epochs": 20, "backbone_lr": 0.0001, "freeze_backbone_epochs": 3, "backbone_warmup_epochs": 2.0, "cooccur_neg": ["ACL:Contusion=3"]},
+  "oafam":  {"combo": "combos/oafam.json", "compartment_token": true, "isolated_weight": 3.0, "context_neg_weight": 2.0, "budget": 2,
+             "batch": 12, "epochs": 20, "backbone_lr": 0.0001, "freeze_backbone_epochs": 0, "backbone_warmup_epochs": 0.0}
+ }
+}

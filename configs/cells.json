@@ -1,0 +1,262 @@
+{
+ "_doc": "Every tile model of the final ensemble: one entry per cell (a recipe trained on the 5 folds). Arguments are rsna_knee.train_tiles options. Stages: A = ImageNet-initialised RSNA models (also the round-1 pseudo-label teachers), P1 = pretraining on the round-1 pseudo labels of OAI + fastMRI, B = RSNA fine-tuning of P1, P2 = pretraining on the round-2 pseudo labels, C = RSNA fine-tuning of P2. Pretraining runs once (validation on fold 1); its best.pt initialises all five folds of the fine-tuned cell.",
+ "common": {
+  "epochs": 25,
+  "batch": 2,
+  "accum": 3,
+  "lr": 0.0004243,
+  "backbone_lr": 6e-05,
+  "freeze_backbone_epochs": 2,
+  "backbone_warmup_epochs": 2.0,
+  "mirror_p": 0.5,
+  "ema_decay": 0.999,
+  "slices_per_tile": 3,
+  "val_tiles_per_series": 96,
+  "fluid_mult": 1.0,
+  "seed": 20261003
+ },
+ "pretrain": {
+  "sagFMpre": {
+   "stage": "P1",
+   "view": "sagittal",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 24,
+   "other_mult": 0.25,
+   "epochs": 30,
+   "early_stop": 5,
+   "train_cache": [
+    "oai",
+    "fastmri"
+   ],
+   "train_labels": "pseudo-round1"
+  },
+  "corFMpre": {
+   "stage": "P1",
+   "view": "coronal",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 1.0,
+   "epochs": 30,
+   "early_stop": 5,
+   "train_cache": [
+    "oai",
+    "fastmri"
+   ],
+   "train_labels": "pseudo-round1"
+  },
+  "axOAIpre": {
+   "stage": "P1",
+   "view": "axial",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 0.5,
+   "batch": 3,
+   "accum": 2,
+   "epochs": 30,
+   "early_stop": 5,
+   "train_cache": [
+    "oai"
+   ],
+   "train_labels": "pseudo-round1"
+  },
+  "allfmpre": {
+   "stage": "P1",
+   "view": "all",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 12,
+   "other_mult": 0.5,
+   "epochs": 30,
+   "early_stop": 5,
+   "train_cache": [
+    "oai",
+    "fastmri"
+   ],
+   "train_labels": "pseudo-round1"
+  },
+  "allcfmpre": {
+   "stage": "P1",
+   "view": "all",
+   "backbone": "caformer-s18-in22k",
+   "tiles_per_series": 8,
+   "other_mult": 0.5,
+   "epochs": 30,
+   "early_stop": 5,
+   "train_cache": [
+    "oai",
+    "fastmri"
+   ],
+   "train_labels": "pseudo-round1"
+  },
+  "allrexpre": {
+   "stage": "P2",
+   "view": "all",
+   "backbone": "rexnetr300",
+   "tiles_per_series": 12,
+   "other_mult": 0.5,
+   "backbone_lr": 0.0001,
+   "max_train_series": 8,
+   "epochs": 30,
+   "early_stop": 5,
+   "train_cache": [
+    "oai",
+    "fastmri"
+   ],
+   "train_labels": "pseudo-round2"
+  }
+ },
+ "cells": {
+  "sagD": {
+   "stage": "A",
+   "view": "sagittal",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 24,
+   "other_mult": 0.25
+  },
+  "corA": {
+   "stage": "A",
+   "view": "coronal",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 0.5
+  },
+  "corD": {
+   "stage": "A",
+   "view": "corfluid",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 1.0
+  },
+  "axiA": {
+   "stage": "A",
+   "view": "axial",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 0.5,
+   "batch": 3,
+   "accum": 2
+  },
+  "sagFM": {
+   "stage": "B",
+   "view": "sagittal",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 24,
+   "other_mult": 0.25,
+   "freeze_backbone_epochs": 3,
+   "init_from": "sagFMpre"
+  },
+  "corFM": {
+   "stage": "B",
+   "view": "coronal",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 0.5,
+   "freeze_backbone_epochs": 3,
+   "init_from": "corFMpre"
+  },
+  "axOAI2": {
+   "stage": "B",
+   "view": "axial",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 16,
+   "other_mult": 0.5,
+   "batch": 3,
+   "accum": 2,
+   "freeze_backbone_epochs": 3,
+   "init_from": "axOAIpre"
+  },
+  "allfm": {
+   "stage": "B",
+   "view": "all",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 12,
+   "other_mult": 0.5,
+   "freeze_backbone_epochs": 3,
+   "init_from": "allfmpre"
+  },
+  "allfmold": {
+   "stage": "B",
+   "view": "all",
+   "backbone": "convnext-tiny-in12k",
+   "tiles_per_series": 12,
+   "other_mult": 0.5,
+   "freeze_backbone_epochs": 3,
+   "init_from": "allfmpre",
+   "seed": 20261023,
+   "_note": "submitted: the same allfm recipe trained on an earlier label version; with the final labels only, a second seed"
+  },
+  "allcfm": {
+   "stage": "B",
+   "view": "all",
+   "backbone": "caformer-s18-in22k",
+   "tiles_per_series": 12,
+   "other_mult": 0.5,
+   "epochs": 20,
+   "batch": 1,
+   "accum": 6,
+   "freeze_backbone_epochs": 3,
+   "init_from": "allcfmpre",
+   "plane": "allcaf"
+  },
+  "allrex": {
+   "stage": "C",
+   "view": "all",
+   "backbone": "rexnetr300",
+   "tiles_per_series": 12,
+   "other_mult": 0.5,
+   "backbone_lr": 0.0001,
+   "max_train_series": 8,
+   "freeze_backbone_epochs": 3,
+   "init_from": "allrexpre",
+   "plane": "rex"
+  }
+ },
+ "teachers": {
+  "round1": {
+   "cells": [
+    "sagD",
+    "corA",
+    "corD",
+    "axiA"
+   ],
+   "tau": 2.0,
+   "oa_weights": {
+    "PF OA": 0.3
+   },
+   "specialists": false,
+   "_doc": "plane-balanced mean of the four stage-A cells (5 folds each, own tile draws), PF OA blended with the ResNet50 OA specialist"
+  },
+  "round2": {
+   "cells": [
+    "sagD",
+    "corA",
+    "corD",
+    "axiA",
+    "sagFM",
+    "corFM",
+    "axOAI2",
+    "allfm",
+    "allcfm"
+   ],
+   "tau": 12.0,
+   "oa_weights": {
+    "Medial OA": 0.3,
+    "PF OA": 0.4
+   },
+   "specialists": true,
+   "_doc": "the stage-A + stage-B ensemble with the OA and canvas-crop specialists, as the inference kernel"
+  }
+ },
+ "inference_order": [
+  "corA",
+  "axiA",
+  "sagD",
+  "corD",
+  "axOAI2",
+  "allfm",
+  "allcfm",
+  "sagFM",
+  "corFM",
+  "allrex",
+  "allfmold"
+ ]
+}

@@ -1,0 +1,258 @@
+{
+ "name": "crop-config-v8zoom",
+ "output_px": 160,
+ "rules": {
+  "output_px": 160,
+  "triplet_step_mm": 3.3,
+  "min_triplets": 4
+ },
+ "views": {
+  "acl_sag": {
+   "plane": "Sagittal",
+   "anchor": "N",
+   "offset": [
+    -3,
+    0,
+    -4
+   ],
+   "width_mm": 40,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -6,
+    6
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "acl_cor": {
+   "plane": "Coronal",
+   "anchor": "N",
+   "offset": [
+    -3,
+    0,
+    -4
+   ],
+   "width_mm": 34,
+   "scale_width": true,
+   "slab_axis": "a",
+   "slab_range": [
+    -14,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "acl_ax": {
+   "plane": "Axial",
+   "anchor": "N",
+   "offset": [
+    -3,
+    0,
+    -4
+   ],
+   "width_mm": 34,
+   "scale_width": true,
+   "slab_axis": "s",
+   "slab_range": [
+    -8,
+    12
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "mcl_cor_fem": {
+   "plane": "Coronal",
+   "anchor": "M",
+   "offset": [
+    15,
+    -3,
+    14
+   ],
+   "width_mm": 36,
+   "scale_width": true,
+   "slab_axis": "a",
+   "slab_range": [
+    -15,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "mcl_cor_tib": {
+   "plane": "Coronal",
+   "anchor": "M",
+   "offset": [
+    15,
+    -3,
+    -16
+   ],
+   "width_mm": 36,
+   "scale_width": true,
+   "slab_axis": "a",
+   "slab_range": [
+    -15,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "mcl_ax": {
+   "plane": "Axial",
+   "anchor": "M",
+   "offset": [
+    15,
+    -3,
+    0
+   ],
+   "width_mm": 34,
+   "scale_width": true,
+   "slab_axis": "s",
+   "slab_range": [
+    -15,
+    15
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "pfc_ax_med": {
+   "plane": "Axial",
+   "anchor": "PFmid",
+   "offset": [
+    9,
+    0,
+    0
+   ],
+   "width_mm": 28,
+   "scale_width": true,
+   "slab_axis": "s",
+   "slab_range": [
+    -10,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "pfc_ax_lat": {
+   "plane": "Axial",
+   "anchor": "PFmid",
+   "offset": [
+    -9,
+    0,
+    0
+   ],
+   "width_mm": 28,
+   "scale_width": true,
+   "slab_axis": "s",
+   "slab_range": [
+    -10,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "pfc_sag": {
+   "plane": "Sagittal",
+   "anchor": "PFmid",
+   "offset": [
+    0,
+    0,
+    0
+   ],
+   "width_mm": 32,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -15,
+    15
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "mtf_cor": {
+   "plane": "Coronal",
+   "anchor": "M",
+   "offset": [
+    0,
+    0,
+    0
+   ],
+   "width_mm": 28,
+   "scale_width": true,
+   "slab_axis": "a",
+   "slab_range": [
+    -15,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "mtf_sag": {
+   "plane": "Sagittal",
+   "anchor": "M",
+   "offset": [
+    0,
+    -3,
+    0
+   ],
+   "width_mm": 32,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -8,
+    8
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "ltf_cor": {
+   "plane": "Coronal",
+   "anchor": "L",
+   "offset": [
+    0,
+    0,
+    0
+   ],
+   "width_mm": 28,
+   "scale_width": true,
+   "slab_axis": "a",
+   "slab_range": [
+    -15,
+    10
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  },
+  "ltf_sag": {
+   "plane": "Sagittal",
+   "anchor": "L",
+   "offset": [
+    0,
+    -3,
+    0
+   ],
+   "width_mm": 32,
+   "scale_width": true,
+   "slab_axis": "m",
+   "slab_range": [
+    -8,
+    8
+   ],
+   "sigma_mm": 6,
+   "train_budget": 4,
+   "infer_cap": 10
+  }
+ }
+}
