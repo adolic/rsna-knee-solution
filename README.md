@@ -68,14 +68,35 @@ checks inference against the Kaggle kernel's own output.
 
 ## Data and licences
 
-* **RSNA competition data:** download it yourself from Kaggle under the competition rules. `labels/` holds labels
-  derived from it: soft labels from the reports, expert labels of the 58 "Gold" studies as given in `train.csv`, keypoint
-  annotations and scanner strata.
-* **OAI:** NIMH Data Archive, data use certification required. `rsna_knee/moaks.py` reads the NDA structure
-  `oai_kmrisemiquant01` directly. Nothing from OAI is redistributed here.
+* **Licence:** the code and the released model weights are © 2026 Antonio Dolic, licensed under
+  [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (`LICENSE`), the licence the competition rules name for
+  winning solutions. You may share and adapt them for non-commercial purposes with attribution ("rsna-knee-solution by
+  Antonio Dolic").
+* **Not covered by that licence:**
+  * `labels/` (see below);
+  * the pretrained backbones the models were fine-tuned from (ConvNeXt-T, CAFormer-S18, ReXNet-R300, EfficientNet-B0:
+    Apache-2.0; RadImageNet ResNet50: MIT);
+  * the Python dependencies.
+
+  Their terms and the citations OAI and fastMRI require are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+* **Research use only:** the models are not a medical device. Do not use them for diagnosis or patient care.
+* **RSNA competition data:** © RSNA. Download it yourself from Kaggle under the competition rules and the RSNA MIRA
+  licence. `labels/` holds labels derived from it:
+  * soft labels from the reports;
+  * expert labels of the 58 "Gold" studies as given in `train.csv`;
+  * keypoint annotations;
+  * scanner strata.
+
+  RSNA keeps all rights in the data. These files are not licensed by us, and their use is subject to the same terms.
+* **OAI:** NIMH Data Archive (Collection 2343), data use certification required. `rsna_knee/moaks.py` reads the NDA
+  structure `oai_kmrisemiquant01` (MOAKS reads) directly. Nothing from OAI is redistributed here.
 * **fastMRI:** NYU fastMRI data sharing agreement. Nothing from fastMRI is redistributed here.
-* The released models were trained with pseudo labels on OAI and fastMRI images and with labels derived from the
-  competition data. Check that your use complies with those terms.
+* **External data in the models:**
+  * 30 tile models were pretrained with pseudo labels on OAI + fastMRI images;
+  * 10 models (axOAI2 and the meniscus specialist) were pretrained on OAI images only;
+  * every model used labels derived from the competition data.
+
+  The table is in THIRD_PARTY_NOTICES.md. Check that your use complies with those terms.
 
 ## What differs from the submitted models
 
@@ -109,4 +130,5 @@ labels/             soft / hard / weights / folds / keypoint targets / proxy str
 kaggle/             offline Kaggle notebook
 tests/              parity_test.py (vs the kernel), smoke_test.py (every stage on a few studies)
 tools/              release helpers (pack assembly from the Kaggle bundles, crop-config scrub, dataset staging)
+LICENSE, LICENSES/  CC BY-NC 4.0 (code + weights); THIRD_PARTY_NOTICES.md: third-party licences, data terms, citations
 ```

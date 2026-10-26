@@ -1,8 +1,14 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "rsna-knee"
 version = "1.0.0"
 description = "RSNA knee abnormality detection: keypoint-centred tile ensemble (6th place solution)"
 requires-python = ">=3.10"
+license = "CC-BY-NC-4.0"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "LICENSES/*.txt"]
 dynamic = ["dependencies"]
 
 [tool.setuptools]
