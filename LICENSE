@@ -1,6 +1,6 @@
 rsna-knee-solution: 6th place solution, RSNA Knee Abnormality Detection (Kaggle, 2026)
 
-Copyright (c) 2026 Antonio Dolic
+Copyright (c) 2026 CentralyDS
 
 The source code in this repository and the released model weights are licensed
 under the Creative Commons Attribution-NonCommercial 4.0 International Public
@@ -31,7 +31,7 @@ The data it was trained on carries the same restriction (RSNA MIRA section 7;
 NYU fastMRI Dataset Sharing Agreement).
 
 Suggested attribution:
-  "rsna-knee-solution by Antonio Dolic (6th place, RSNA Knee Abnormality
+  "rsna-knee-solution by CentralyDS (6th place, RSNA Knee Abnormality
   Detection, Kaggle 2026), licensed under CC BY-NC 4.0."
 
 =======================================================================

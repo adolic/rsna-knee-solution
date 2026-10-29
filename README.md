@@ -84,10 +84,10 @@ checks inference against the Kaggle kernel's own output.
 
 ## Data and licences
 
-* **Licence:** the code and the released model weights are © 2026 Antonio Dolic, licensed under
+* **Licence:** the code and the released model weights are © 2026 CentralyDS, licensed under
   [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (`LICENSE`), the licence the competition rules name for
   winning solutions. You may share and adapt them for non-commercial purposes with attribution ("rsna-knee-solution by
-  Antonio Dolic").
+  CentralyDS").
 * **Not covered by that licence:**
   * `labels/` (see below);
   * the pretrained backbones the models were fine-tuned from (ConvNeXt-T, CAFormer-S18, ReXNet-R300, EfficientNet-B0:

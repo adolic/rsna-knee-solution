@@ -1,6 +1,6 @@
 # Third-party notices
 
-The code and the released model weights are © 2026 Antonio Dolic and licensed under CC BY-NC 4.0 (`LICENSE`). This file
+The code and the released model weights are © 2026 CentralyDS and licensed under CC BY-NC 4.0 (`LICENSE`). This file
 lists what that licence does not cover: the pretrained weights the models start from, the data they were trained on, and
 the Python dependencies. It also gives the citations those sources require. The terms below apply in addition to
 CC BY-NC 4.0.
