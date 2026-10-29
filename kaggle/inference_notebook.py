@@ -6,9 +6,12 @@ import shutil
 import sys
 from pathlib import Path
 
-DATASET = next(p for p in Path("/kaggle/input").glob("*") if (p / "models" / "manifest.json").exists())
-COMP = next(p for p in [Path("/kaggle/input/competitions/rsna-knee-abnormality-detection"), Path("/kaggle/input/rsna-knee-abnormality-detection")]
-            if (p / "test.csv").exists())
+INPUT = Path("/kaggle/input")
+# attached inputs live at /kaggle/input/<slug> or, in the newer layout, /kaggle/input/{datasets,competitions}/<owner>/<slug>
+DATASET = next(m.parent.parent for pat in ("*/models/manifest.json", "*/*/models/manifest.json", "*/*/*/models/manifest.json")
+               for m in INPUT.glob(pat))
+COMP = next(t.parent for pat in ("*/test.csv", "*/*/test.csv", "*/*/*/test.csv") for t in INPUT.glob(pat)
+            if "rsna-knee-abnormality-detection" in str(t))
 sys.path.insert(0, str(DATASET / "code"))
 from rsna_knee import predict  # noqa: E402
 
