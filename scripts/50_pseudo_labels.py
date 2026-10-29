@@ -22,7 +22,7 @@ import pandas as pd
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 from rsna_knee.labels import labels  # noqa: E402
-from rsna_knee.paths import DATA, LABELS, TARGETS  # noqa: E402
+from rsna_knee.paths import DATA, LABELS, PSEUDO, TARGETS, TEACHERS  # noqa: E402
 
 
 def calibrate(prob):
@@ -41,13 +41,13 @@ def main():
     ap.add_argument("--devices", default="cuda:0"); ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--out", default=None, help="default DATA/pseudo/round<N>.csv")
     a = ap.parse_args()
-    pack = Path(a.teacher_pack or DATA / "teachers" / f"round{a.round}")
+    pack = Path(a.teacher_pack or TEACHERS / f"round{a.round}")
     if not (pack / "manifest.json").exists():
         subprocess.run([sys.executable, str(REPO / "scripts/90_pack_models.py"), "--teacher", f"round{a.round}", "--out", str(pack)], check=True)
     parts = []
     for src in a.sources:
         folder, split = src.rsplit(":", 1)
-        out = DATA / "pseudo" / f"round{a.round}-{split}"
+        out = PSEUDO / f"round{a.round}-{split}"
         studies = pd.read_csv(Path(folder) / f"{split}.csv").StudyInstanceUID.tolist()
         cmd = [sys.executable, "-m", "rsna_knee.predict", "--models", str(pack), "--input", folder, "--split", split, "--out", str(out),
                "--devices", a.devices] + (["--studies", *studies[:a.limit]] if a.limit else [])
@@ -62,7 +62,7 @@ def main():
         p = p.loc[keep]
         parts.append(pd.DataFrame(calibrate(p.to_numpy(float)), index=p.index, columns=list(TARGETS)))
     lab = pd.concat(parts); lab.index.name = "StudyInstanceUID"
-    dst = Path(a.out or DATA / "pseudo" / f"round{a.round}.csv"); dst.parent.mkdir(parents=True, exist_ok=True)
+    dst = Path(a.out or PSEUDO / f"round{a.round}.csv"); dst.parent.mkdir(parents=True, exist_ok=True)
     lab.to_csv(dst, float_format="%.6f")
     print(f"{len(lab)} knees -> {dst}; mean pseudo label per target: {lab.mean().round(3).to_dict()}")
 

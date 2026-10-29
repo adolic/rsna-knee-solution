@@ -37,6 +37,22 @@ python -m rsna_knee.predict --input /path/to/one_study_folder --out predictions/
 * Outputs: `predictions.csv`, `receipts.jsonl` (per-study timing, knees, fallbacks) and `verification.json`.
 * On Kaggle (offline): attach the released dataset and run `kaggle/inference_notebook.py`.
 
+## Environment
+
+| | |
+|---|---|
+| Hardware (training, reference runs) | Intel Core i7-8700K (6 cores / 12 threads), 64 GB RAM, 1 × NVIDIA RTX 4090 24 GB. During the competition some cells were also trained on rented RTX 3090 / RTX 4090 machines (vast.ai) with the same code. |
+| Hardware (submission) | Kaggle GPU notebook, 2 × T4, about 6–6.5 h for the hidden test |
+| OS | Arch Linux, kernel 7.2; NVIDIA driver 615.71, CUDA 13.0, cuDNN 9.20 (also tested on the Kaggle GPU image) |
+| Software | Python 3.11.15; exact package versions in `requirements.txt` (`pip install -r requirements.txt`) |
+| Paths | `SETTINGS.json` is the only place input/output paths are set (`DATA_DIR`, raw data, caches, `CHECKPOINT_DIR`, `MODEL_DIR`, `SUBMISSION_DIR`, ...); the environment variable `RSNA_KNEE_DATA` overrides `DATA_DIR` |
+| Commands | [entry_points.md](entry_points.md) lists every command, what it reads and what it writes |
+
+Side effects and assumptions: nothing under the raw-data folders is ever modified; every stage writes only to its own
+output folder and skips finished runs, so a stage can be resumed by re-running it. Training needs the external OAI and
+fastMRI data (each under its own data use agreement, see below); inference needs only the competition data and the
+released model pack.
+
 ## Reproducing the training
 
 Each stage is resumable and skips finished runs. Times are for one RTX 4090 (24 GB); stages A and B parallelise over GPUs.
@@ -130,5 +146,6 @@ labels/             soft / hard / weights / folds / keypoint targets / proxy str
 kaggle/             offline Kaggle notebook
 tests/              parity_test.py (vs the kernel), smoke_test.py (every stage on a few studies)
 tools/              release helpers (pack assembly from the Kaggle bundles, crop-config scrub, dataset staging)
+SETTINGS.json       all input/output paths; entry_points.md: every command; directory_structure.txt
 LICENSE, LICENSES/  CC BY-NC 4.0 (code + weights); THIRD_PARTY_NOTICES.md: third-party licences, data terms, citations
 ```

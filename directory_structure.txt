@@ -1,0 +1,13 @@
+.
+./configs
+./configs/combos
+./configs/crops
+./docs
+./kaggle
+./labels
+./LICENSES
+./rsna_knee
+./scripts
+./tests
+./tests/reference
+./tools

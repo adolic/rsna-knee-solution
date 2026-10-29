@@ -24,7 +24,7 @@ import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-from rsna_knee.paths import CACHE, DATA, LABELS, RUNS, TARGETS  # noqa: E402
+from rsna_knee.paths import CACHE, DATA, LABELS, MOAKS, RUNS, TARGETS  # noqa: E402
 
 KINDS = ("syneff", "oa", "menbak")
 BLEND = {   # target: (kind, head, weight); evidence in docs/LABELS.md
@@ -42,7 +42,7 @@ def main():
     ap.add_argument("--kinds", nargs="*", default=list(KINDS)); ap.add_argument("--nda")
     ap.add_argument("--base"); ap.add_argument("--out"); ap.add_argument("--smoke", action="store_true")
     a = ap.parse_args()
-    out_dir = DATA / "moaks"; out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = MOAKS; out_dir.mkdir(parents=True, exist_ok=True)
     if a.stage == "targets":
         from rsna_knee import moaks
         knees = set(pd.read_csv(CACHE / "oai" / "knee_frame.csv").study_uid) if (CACHE / "oai" / "knee_frame.csv").exists() else None

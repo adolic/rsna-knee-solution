@@ -35,7 +35,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from .paths import MODELS, TARGETS
+from .paths import MODELS, SUBMISSION, TARGETS
 
 TARGETS = list(TARGETS)
 UID = "StudyInstanceUID"
@@ -377,7 +377,7 @@ def main(argv=None):
     ap.add_argument("--split", default="test", help="Kaggle-style folder: read <split>.csv / <split>_series.csv / <split>_series/")
     ap.add_argument("--studies", nargs="*", help="only these study ids (Kaggle-style folder)")
     ap.add_argument("--series-csv", default=None, help="one study folder: per-series Fluid_Sensitive flags")
-    ap.add_argument("--out", required=True, help="output folder: predictions.csv, receipts.jsonl, verification.json")
+    ap.add_argument("--out", default=str(SUBMISSION), help="output folder: predictions.csv, receipts.jsonl, verification.json (default: SETTINGS.json SUBMISSION_DIR)")
     ap.add_argument("--devices", default=None, help="comma list, default every visible CUDA device")
     ap.add_argument("--workers", type=int, default=None, help="worker processes (default: 2 per GPU)")
     a = ap.parse_args(argv)

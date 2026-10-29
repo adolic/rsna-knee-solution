@@ -17,7 +17,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-from rsna_knee.paths import CACHE, CONFIGS, DATA, RUNS  # noqa: E402
+from rsna_knee.paths import CACHE, CONFIGS, DATA, PSEUDO, RUNS  # noqa: E402
 
 STAGES = ("A", "P1", "B", "P2", "C")
 
@@ -27,7 +27,7 @@ def run_args(name, spec, common, fold, out, smoke):
     args = ["--out", str(out), "--fold", str(fold), "--cache", str(CACHE / "rsna")]
     if "train_cache" in spec:   # pretraining: external knees, validation on RSNA fold 1
         args += ["--train-cache", *[str(CACHE / c) for c in spec["train_cache"]],
-                 "--train-labels-file", str(DATA / "pseudo" / f"{spec['train_labels'].replace('pseudo-', '')}.csv")]
+                 "--train-labels-file", str(PSEUDO / f"{spec['train_labels'].replace('pseudo-', '')}.csv")]
     if "init_from" in spec:
         args += ["--init-from", str((RUNS / "smoke" if smoke else RUNS) / spec["init_from"] / "best.pt")]
     for k, v in a.items():

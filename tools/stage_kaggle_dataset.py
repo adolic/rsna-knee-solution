@@ -25,6 +25,7 @@ def main():
     shutil.copy2(REPO / "kaggle" / "inference_notebook.py", out / "code" / "inference_notebook.py")
     for f in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
         shutil.copy2(REPO / f, out / f)
+    shutil.copy2(REPO / "SETTINGS.json", out / "code" / "SETTINGS.json")   # rsna_knee/paths.py reads it from the code root
     shutil.copytree(REPO / "LICENSES", out / "LICENSES", dirs_exist_ok=True)
     shutil.copytree(a.models, out / "models", dirs_exist_ok=True)
     meta = dict(title="RSNA knee 6th place: code and models", id=a.id, licenses=[dict(name=LICENSE_ID)], keywords=["pre-trained model"])

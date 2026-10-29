@@ -1,0 +1,18 @@
+{
+  "_comment": "All input/output locations. Relative paths are relative to DATA_DIR; DATA_DIR itself is relative to the repository root. The environment variable RSNA_KNEE_DATA, when set, replaces DATA_DIR. Every script reads its paths from here through rsna_knee/paths.py.",
+  "DATA_DIR": "data",
+  "RAW_RSNA_DIR": "raw/rsna",
+  "RAW_OAI_DIR": "raw/oai",
+  "RAW_OAI_DICOM_DIR": "raw/oai-dicom",
+  "RAW_FASTMRI_DIR": "raw/fastmri",
+  "RAW_FASTMRI_DICOM_DIR": "raw/fastmri-dicom",
+  "PRETRAINED_DIR": "pretrained",
+  "CACHE_DIR": "cache",
+  "CHECKPOINT_DIR": "runs",
+  "TEACHER_DIR": "teachers",
+  "PSEUDO_LABEL_DIR": "pseudo",
+  "MOAKS_DIR": "moaks",
+  "SPECIALIST_PACK_DIR": "specialist-pack",
+  "MODEL_DIR": "models",
+  "SUBMISSION_DIR": "predictions"
+}

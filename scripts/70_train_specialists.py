@@ -14,7 +14,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-from rsna_knee.paths import CACHE, CONFIGS, DATA, RAW_OAI, RAW_RSNA, RUNS  # noqa: E402
+from rsna_knee.paths import CACHE, CONFIGS, DATA, PSEUDO, RAW_OAI, RAW_OAI_DICOM, RAW_RSNA, RUNS, SPECIALIST_PACK  # noqa: E402
 
 SPEC = json.loads((CONFIGS / "specialists.json").read_text())
 SPEC_TARGET_RUNS = {"men": "men", "acl": "acl", "oafam": "oafam"}   # pack names of the canvas-crop specialists
@@ -24,7 +24,7 @@ def build_caches(names, studies, workers):
     from rsna_knee import crop_cache
     for name in names:
         c = SPEC["caches"][name]
-        src = {"rsna": (RAW_RSNA, "train"), "oai": (DATA / "raw" / "oai-dicom", "oai")}[c["from"]]
+        src = {"rsna": (RAW_RSNA, "train"), "oai": (RAW_OAI_DICOM, "oai")}[c["from"]]
         crop_cache.build(CONFIGS / "crops" / f"{c['config']}.json", CACHE / c["from"], CACHE / name, c["size"], source=c["source"],
                          dicom_folder=src[0], split=src[1], studies=studies, workers=workers, views=c.get("views"))
 
@@ -43,7 +43,7 @@ def run_args(name, fold, out, smoke):
         else:
             a += [f"--{k.replace('_', '-')}", str(v)]
     if "train_labels" in r:
-        a += ["--train-labels-csv", str(DATA / "pseudo" / f"{r['train_labels'].replace('pseudo-', '')}.csv")]
+        a += ["--train-labels-csv", str(PSEUDO / f"{r['train_labels'].replace('pseudo-', '')}.csv")]
     if "init_backbone" in r:
         a += ["--init-backbone", str((RUNS / "smoke" if smoke else RUNS) / f"spec-{r['init_backbone']}" / "best.pt")]
     if smoke:
@@ -72,7 +72,7 @@ def view_ids(rows_cfg):
 
 def pack(folds, runs=RUNS):
     import shutil
-    dst = DATA / "specialist-pack"
+    dst = SPECIALIST_PACK
     for d in ("oa", "specialists"):
         (dst / d).mkdir(parents=True, exist_ok=True)
     cfg = lambda n: json.loads((CONFIGS / "crops" / f"crop-config-{n}.json").read_text())
