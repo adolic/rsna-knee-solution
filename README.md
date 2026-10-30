@@ -43,6 +43,7 @@ python -m rsna_knee.predict --input /path/to/one_study_folder --out predictions/
 |---|---|
 | Hardware (training, reference runs) | Intel Core i7-8700K (6 cores / 12 threads), 64 GB RAM, 1 × NVIDIA RTX 4090 24 GB. During the competition some cells were also trained on rented RTX 3090 / RTX 4090 machines (vast.ai) with the same code. |
 | Hardware (submission) | Kaggle GPU notebook, 2 × T4, about 6–6.5 h for the hidden test |
+| Kaggle image (submission + public notebook) | `gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461` (Python 3.12, torch 2.10), pinned in the public notebook [centralyds/rsna-knee-6th-place-inference](https://www.kaggle.com/code/centralyds/rsna-knee-6th-place-inference), which runs on the public model dataset and reproduces the submitted predictions exactly |
 | OS | Arch Linux, kernel 7.2; NVIDIA driver 615.71, CUDA 13.0, cuDNN 9.20 (also tested on the Kaggle GPU image) |
 | Software | Python 3.11.15; exact package versions in `requirements.txt` (`pip install -r requirements.txt`) |
 | Paths | `SETTINGS.json` is the only place input/output paths are set (`DATA_DIR`, raw data, caches, `CHECKPOINT_DIR`, `MODEL_DIR`, `SUBMISSION_DIR`, ...); the environment variable `RSNA_KNEE_DATA` overrides `DATA_DIR` |
